@@ -1,0 +1,25 @@
+dataset:
+  clinical_trial:
+    format: csv
+    header: 0
+    sep: ","
+    path: test/resources/clinical_trials.csv
+    columns_mapping:
+      scientific_title: title
+    dates:
+      - name: date
+        format_date: "%d-%m-%Y"
+  pubmed:
+    format: csv
+    header: 0
+    sep: ","
+    path: test/resources/pubmed.csv
+    dates:
+      - name: date
+        format_date: "%d-%m-%Y"
+
+  drugs:
+    format: csv
+    header: 0
+    sep: ","
+    path: test/resources/drugs.csv
