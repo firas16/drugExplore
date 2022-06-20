@@ -3,4 +3,5 @@
 
 ## For tests, document generations
 pytest
+pytest-cov
 

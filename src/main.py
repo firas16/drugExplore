@@ -43,14 +43,23 @@ data.to_csv("test/resources/result.csv")
 print(data.head(10))
 
 #functional queries
+#records format
+data.to_json(path_or_buf=conf['output']['path_records'], orient="records")
 
-# get drugIds present in clinical_trials and pubmed
-drugs_with_trials = data.merge(drugs_df, on='drug', how="inner")
+#second format
+data["details"] = list(zip(data.journal, data.id, data.date))
+data["details"] = data["details"].map(lambda elem:  [{'journal': elem[0]},{'id': elem[1]}, {'date': elem[2]}])
+result= data[['drug', 'details']]
+result = result.groupby("drug")['details'].agg(list).reset_index().set_index('drug')
+
+json_output_format = result\
+    .to_json(path_or_buf= conf['output']['path_oriented_drugs'], orient='index', date_format='iso', force_ascii=False)
+
 
 #get drugs referenced in journals in 2020
+
 drugs_referenced_in_journals = data[data['drug'].notnull()]
 drugs_referenced_in_journals = drugs_referenced_in_journals.drop_duplicates(subset=['journal', 'date', 'drug'])
-
 # select distinct drug, journal from data where data >= '2020-01-01'
 import datetime as dt
 ref_date = dt.datetime.strptime("01-01-2020", "%d-%m-%Y").date()

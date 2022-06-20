@@ -23,3 +23,7 @@ dataset:
     header: 0
     sep: ","
     path: test/resources/drugs.csv
+
+output:
+  path_records: test/resources/records.json
+  path_oriented_drugs: test/resources/drugs.json
