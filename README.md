@@ -1,5 +1,5 @@
 ## DrugExplore
-exploratory analysis of drug mention in publications.
+Exploratory analysis of drug mention in publications.
 
 ## Requirements
 python3, make
